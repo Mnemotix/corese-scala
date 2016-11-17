@@ -14,38 +14,26 @@ object Version {
 }
 
 object Library {
-  // Scala
-//  val scalaReflect = "org.scala-lang" % "scala-reflect" % Version.scala
-//  val commonsLang3 = "org.apache.commons" % "commons-lang3" % "3.4"
-  // Testing
-  val scalaTest = "org.scalatest" %% "scalatest" % Version.scalaTest
-
-
+  // Config
   val config = "com.typesafe" % "config" % Version.typesafeConfig
   val playJson = "com.typesafe.play" %% "play-json" % Version.playJson
-//  val scalaXml = "org.scala-lang.modules" %% "scala-xml" % Version.scalaXml
-
-  // Logging
   val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % Version.scalaLogging
-  val logbackClassic = "ch.qos.logback" % "logback-classic" % Version.logback
 
-  // Semengine
+  // Reasoner
   val corese = "fr.inria.wimmics" % "kgtool" % Version.corese
+
+  // Testing
+  val scalaTest = "org.scalatest" %% "scalatest" % Version.scalaTest
+  val logbackClassic = "ch.qos.logback" % "logback-classic" % Version.logback
 }
 
 object Dependencies {
 
   import Library._
 
-  val testing = List(
+  val testing = Seq(
     scalaTest % "test",
     logbackClassic % "test"
   )
-
-  val logging = List(
-    scalaLogging,
-    logbackClassic % "test"
-  )
-
-  val coreseScala = testing ++ logging ++ List(config, playJson, corese)
+  val coreseScala = testing ++ List(scalaLogging, config, playJson, corese)
 }

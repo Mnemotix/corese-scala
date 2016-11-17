@@ -33,9 +33,6 @@ publishTo := {
 credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
 
 resolvers ++= Seq(
-  Resolver.mavenLocal,
-  "MNX Nexus (releases)" at "https://repo.mnemotix.com/repository/maven-releases/",
-  "MNX Nexus (snapshots)" at "https://repo.mnemotix.com/repository/maven-snapshots/",
   "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases",
   "Sonatype (Snapshots)" at "https://oss.sonatype.org/content/repositories/snapshots",
   "Typesafe (Releases)" at "http://repo.typesafe.com/typesafe/releases/"

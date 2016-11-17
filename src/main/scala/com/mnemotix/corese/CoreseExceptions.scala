@@ -15,6 +15,6 @@ case class URIAlreadyInUseException(message:String, cause:Throwable) extends Exc
   def this(message:String) = this(message, null)
 }
 
-case class KGramLoadException(message:String, cause:Throwable) extends Exception(message, cause){
+case class KGramLoadingException(message:String, cause:Throwable) extends Exception(message, cause){
   def this(message:String) = this(message, null)
 }

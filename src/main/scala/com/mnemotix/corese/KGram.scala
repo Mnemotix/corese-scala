@@ -82,7 +82,7 @@ class KGram {
     try {
       loader.load(stream, source, source, entailmentBase, fileFormat)
     } catch {
-      case t:Throwable => throw new KGramLoadException("Unable to load data", t)
+      case t:Throwable => throw new KGramLoadingException("Unable to load data", t)
     }
   }
 

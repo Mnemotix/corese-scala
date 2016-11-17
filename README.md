@@ -1,4 +1,4 @@
-# Corese Scala Wrapper
+# Scala Wrapper for Corese KGRAM
 
 Corese-Scala is a scala wrapper for the [Corese/KGRAM](https://github.com/Wimmics/corese) project.
 It also provides some useful features like :
@@ -85,11 +85,11 @@ Once the configuration is properly set, you just have to instanciate the reasone
     kgram.load() // loads files from conf
     kgram.clear() // reset the graph dropping all nodes and edges
     
-    val query = """PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-    |SELECT DISTINCT (count(DISTINCT ?concept) as ?c)
-    |WHERE {
-    |  ?concept a skos:Concept
-    |}""".stripMargin
+    val query: String = s"""PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+          |SELECT DISTINCT (count(DISTINCT ?concept) as ?c)
+          |WHERE {
+          |  ?concept a skos:Concept
+          |}""".stripMargin
     
     val mappings: Mappings = kgram.executeSync(query) // execute a blocking SPARQL query
     mappings.get(0).getValue("?c").asInstanceOf[IDatatype].intValue()
