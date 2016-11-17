@@ -9,7 +9,7 @@ It also provides some useful features like :
 
 You must add it as a dependency to your SBT project
 
-```
+```scala
 resolvers ++= Seq(
   "MNX Nexus (releases)" at "https://repo.mnemotix.com/repository/maven-releases/",
   "MNX Nexus (snapshots)" at "https://repo.mnemotix.com/repository/maven-snapshots/"
@@ -23,7 +23,7 @@ libraryDependencies += "com.mnemotix" %% "corese-scala" % "1.0-SNAPSHOT"
 `corese-scala` uses the Typesafe Config library to load configuration.
 So it is waiting for some configuration sections in an `application.conf` file located into the classpath.
 
-```
+```json
 // Reasoner configuration
 
 kgram {
@@ -72,7 +72,7 @@ namespaces {
 The corese-scala API is pretty simple.
 Once the configuration is properly set, you just have to instanciate the reasoner and to ask it to load files.
 
-```
+```scala
 
     val kgram:KGram = new KGram
     kgram.load() // loads files from conf
