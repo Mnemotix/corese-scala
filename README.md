@@ -73,6 +73,13 @@ The corese-scala API is pretty simple.
 Once the configuration is properly set, you just have to instanciate the reasoner and to ask it to load files.
 
 ```scala
+    import com.mnemotix.corese.KGram
+    import fr.inria.acacia.corese.api.IDatatype
+    import fr.inria.edelweiss.kgram.core.Mappings
+    
+    import scala.concurrent.duration._
+    import scala.concurrent.{Await, Future}
+    import scala.util.{Failure, Success}
 
     val kgram:KGram = new KGram
     kgram.load() // loads files from conf
@@ -88,7 +95,7 @@ Once the configuration is properly set, you just have to instanciate the reasone
     mappings.get(0).getValue("?c").asInstanceOf[IDatatype].intValue()
 
     // execute a non blocking SPARQL query
-    val futureMappings: Future[Mappings] = kgram.execute(queryStr)
+    val futureMappings: Future[Mappings] = kgram.execute(query)
     futureMappings onComplete {
       case Success(m) => {
         m.get(0).getValue("?c").asInstanceOf[IDatatype].intValue()
