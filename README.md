@@ -23,7 +23,7 @@ libraryDependencies += "com.mnemotix" %% "corese-scala" % "1.0-SNAPSHOT"
 `corese-scala` uses the Typesafe Config library to load configuration.
 So it is waiting for some configuration sections in an `application.conf` file located into the classpath.
 
-```json
+```
 // Reasoner configuration
 
 kgram {
