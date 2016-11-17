@@ -1,4 +1,4 @@
-# corese-scala
+# Corese Scala Wrapper
 
 Corese-Scala is a scala wrapper for the [Corese/KGRAM](https://github.com/Wimmics/corese) project.
 It also provides some useful features like :
