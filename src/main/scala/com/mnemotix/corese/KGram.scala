@@ -7,8 +7,8 @@ import fr.inria.edelweiss.kgraph.api.GraphListener
 import fr.inria.edelweiss.kgraph.core.Graph
 import fr.inria.edelweiss.kgraph.query.QueryProcess
 import fr.inria.edelweiss.kgtool.load.{Load, LoadException}
-import scala.collection.JavaConverters._
 
+import scala.collection.JavaConverters._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
@@ -71,17 +71,16 @@ class KGram {
         }
       } else {
         println(Console.BLUE + s"Loading file : ${file.getAbsolutePath}" + Console.RESET)
-        load(new FileInputStream(file), source)
-//        loader.loadWE(file.getAbsolutePath, source, RDFXML_FORMAT)
+        load(new FileInputStream(file), source, guessMimeType(file.getName))
       }
     }
     else throw new InvalidConfigurationException(s"The path you are trying to load into KGram was not found : ${file.getAbsolutePath}", null)
   }
 
   @throws(classOf[LoadException])
-  def load(stream: InputStream, source: String):Unit = {
+  def load(stream: InputStream, source: String, fileFormat:Int):Unit = {
     try {
-      loader.load(stream, source, source, entailmentBase, RDFXML_FORMAT)
+      loader.load(stream, source, source, entailmentBase, fileFormat)
     } catch {
       case t:Throwable => throw new KGramLoadException("Unable to load data", t)
     }
@@ -106,5 +105,19 @@ class KGram {
 
   def countNodes = graph.getAllNodes.iterator().asScala.size
 
-//  def countEdges = graph.getAllEdges().iterator().asScala.size
+  def guessMimeType(filename:String):Int = {
+    if(filename.endsWith(".rdf")) RDFXML_FORMAT
+    else if(filename.endsWith(".rdfs")) RDFXML_FORMAT
+    else if(filename.endsWith(".owl")) RDFXML_FORMAT
+    else if(filename.endsWith(".xml")) RDFXML_FORMAT
+    else if(filename.endsWith(".rdfa")) RDFA_FORMAT
+    else if(filename.endsWith(".html")) RDFA_FORMAT
+    else if(filename.endsWith(".nt")) NT_FORMAT
+    else if(filename.endsWith(".json")) JSONLD_FORMAT
+    else if(filename.endsWith(".ttl")) TURTLE_FORMAT
+    else if(filename.endsWith(".rul")) RULE_FORMAT
+    else if(filename.endsWith(".nquad")) NQUADS_FORMAT
+    else if(filename.endsWith(".sparql")) QUERY_FORMAT
+    else UNDEF_FORMAT
+  }
 }
